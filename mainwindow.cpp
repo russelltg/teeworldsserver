@@ -25,6 +25,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    Q_INIT_RESOURCE(teeworldsserver);
+
+    
     installPath = QFileDialog::getExistingDirectory(this, QStringLiteral("Open teeworlds install directory"),
                                                QDir::homePath());
 
@@ -90,7 +93,10 @@ MainWindow::MainWindow(QWidget *parent)
     addConfigWidget(new TeamDamageConfigWidget, 8, layout);
     
     connect(mapConfigWidget, &MapConfigWidget::mapChanged, this, [this, mapView](QString map) {
-        pixmapForMap = QPixmap("map/" + map + ".png");
+        pixmapForMap = QPixmap(":/map/" + map + ".png");
+        if(pixmapForMap.isNull()) {
+            qDebug() << "Pixmap null: " << (":/map/" +  map + ".png");
+        }
         mapView->setPixmap(pixmapForMap.scaled(600, 600, Qt::KeepAspectRatio));
     });
     mapConfigWidget->mapChanged("dm1");

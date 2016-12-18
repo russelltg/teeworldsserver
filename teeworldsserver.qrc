@@ -1,0 +1,19 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>map/ctf1.png</file>
+        <file>map/ctf2.png</file>
+        <file>map/ctf3.png</file>
+        <file>map/ctf4.png</file>
+        <file>map/ctf5.png</file>
+        <file>map/ctf6.png</file>
+        <file>map/ctf7.png</file>
+        <file>map/dm1.png</file>
+        <file>map/dm2.png</file>
+        <file>map/dm6.png</file>
+        <file>map/dm7.png</file>
+        <file>map/dm8.png</file>
+        <file>map/dm9.png</file>
+    </qresource>
+</RCC>
+

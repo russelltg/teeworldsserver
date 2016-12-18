@@ -5,6 +5,7 @@
 #include <QPlainTextEdit>
 #include <QProcess>
 #include <QPushButton>
+#include <QPixmap>
 #include <QGridLayout>
 
 #include "configwidget.h"
@@ -23,6 +24,7 @@ private:
     bool disablePickers();
     bool enablePickers();
 
+    QPixmap pixmapForMap;
     std::vector<ConfigWidget*> configWidgets;
     QString installPath;
     QProcess* serverProcess;

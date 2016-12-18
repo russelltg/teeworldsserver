@@ -60,26 +60,40 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     auto mainWidget = new QWidget;
-
+    auto mapView = new QLabel;
+    mapView->setMinimumSize(splitter->sizeHint());
+    
     splitter->addWidget(mainWidget);
     splitter->addWidget(output);
     
     splitter->setChildrenCollapsible(false);
-
+    
+    auto configHolder = new QWidget;
+    
+    auto hbox = new QHBoxLayout;
+    mainWidget->setLayout(hbox);
+    hbox->addWidget(configHolder);
+    hbox->addWidget(mapView);
+    
     auto layout = new QGridLayout;
-    mainWidget->setLayout(layout);
+    configHolder->setLayout(layout);
     
     addConfigWidget(new ServerNameConfigWidget, 0, layout);
     addConfigWidget(new PasswordConfigWidget, 1, layout);
     addConfigWidget(new LanConfigWidget, 2, layout);
     addConfigWidget(new GameTypeConfigWidget, 3, layout);
-    addConfigWidget(new MapConfigWidget(installPath), 4, layout);
+    auto mapConfigWidget = new MapConfigWidget(installPath);
+    addConfigWidget(mapConfigWidget, 4, layout);
     addConfigWidget(new MaxPlayersConfigWidget, 5, layout);
     addConfigWidget(new MaxScoreConfigWidget, 6, layout);
     addConfigWidget(new TimeLimitConfigWidget, 7, layout);
     addConfigWidget(new TeamDamageConfigWidget, 8, layout);
     
-
+    connect(mapConfigWidget, &MapConfigWidget::mapChanged, this, [this, mapView](QString map) {
+        pixmapForMap = QPixmap("map/" + map + ".png");
+        mapView->setPixmap(pixmapForMap.scaled(600, 600, Qt::KeepAspectRatio));
+    });
+    mapConfigWidget->mapChanged("dm1");
 
     auto buttons = new QWidget;
     auto buttonslayout = new QHBoxLayout;

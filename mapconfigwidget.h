@@ -9,7 +9,9 @@
 #include <QDirIterator>
 
 class MapConfigWidget : public ConfigWidget {
+    Q_OBJECT
 public:
+    
     MapConfigWidget(QString installDir, QWidget* parent = nullptr) : ConfigWidget(parent) {
         
         auto layout = new QHBoxLayout;
@@ -34,6 +36,7 @@ public:
         combo->addItems(entries);
         connect(combo, static_cast<void(QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), this, [this](QString newVal) {
             map = newVal;
+            mapChanged(newVal);
         });
         layout->addWidget(combo);
         
@@ -49,6 +52,8 @@ public:
 
     QString map = "dm1";
     
+signals:
+    void mapChanged(QString newMap);
 };
 
 #endif // MAP_CONFIG_WIDGET_H

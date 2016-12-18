@@ -4,6 +4,26 @@ find_package(Qt5 COMPONENTS Core Widgets)
 
 set(CMAKE_AUTOMOC ON)
 
-add_executable(teeworldsserver configwidget.h gametypeconfigwidget.h lanconfigwidget.h main.cpp mainwindow.cpp mainwindow.h maxplayersconfigwidget.h)
+set(SERVER_SRCS 
+    main.cpp
+    mainwindow.cpp
+    mapconfigwidget.cpp
+)
+
+set(SERVER_HEADERS
+    maxscoreconfigwidget.h
+    maxplayersconfigwidget.h
+    teamdamageconfigwidget.h
+    servernameconfigwidget.h
+    lanconfigwidget.h
+    timelimitconfigwidget.h
+    configwidget.h
+    mainwindow.h
+    mapconfigwidget.h
+    passwordconfigwidget.h
+    gametypeconfigwidget.h
+)
+
+add_executable(teeworldsserver ${SERVER_SRCS} ${SERVER_HEADERS})
 
 target_link_libraries(teeworldsserver Qt5::Core Qt5::Widgets)

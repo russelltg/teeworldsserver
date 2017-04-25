@@ -21,8 +21,8 @@ public:
 private:
     void addConfigWidget(ConfigWidget* widget, int row, QGridLayout* layout);
     
-    bool disablePickers();
-    bool enablePickers();
+    void disablePickers();
+    void enablePickers();
 
     QPixmap pixmapForMap;
     std::vector<ConfigWidget*> configWidgets;

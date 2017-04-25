@@ -114,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
         auto configPath = 
 #ifdef Q_OS_WIN32
-            QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/Teeworlds/server.cfg"
+            QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/../Teeworlds/server.cfg"
 #else
             QDir::homePath() + "/.teeworlds/server.cfg"
 #endif
@@ -125,6 +125,8 @@ MainWindow::MainWindow(QWidget *parent)
             {
                 QTextStream stream(&f);
                 stream << config;
+            } else {
+                qDebug() << "Failed to write to " << configPath << " with error: " << f.errorString();
             }
         }
         serverProcess = new QProcess;
@@ -178,14 +180,14 @@ void MainWindow::addConfigWidget(ConfigWidget* widget, int row, QGridLayout* lay
     configWidgets.push_back(widget);
 }
 
-bool MainWindow::disablePickers()
+void MainWindow::disablePickers()
 {
     for(auto item : configWidgets) {
         item->setEnabled(false);
     }
 }
 
-bool MainWindow::enablePickers()
+void MainWindow::enablePickers()
 {
     for(auto item : configWidgets) {
         item->setEnabled(true);
